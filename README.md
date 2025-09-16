@@ -22,3 +22,9 @@ open http://localhost:1337/admin
 Pull Request link: https://github.com/PearlThoughtsInternship/The-Config-Crew/pull/2
 
 Loom video link:  https://www.loom.com/share/b9d8f83617ba4323879a90081e5af18c
+
+** Task 2 **
+Containerization strapi application on Docker locally
+
+PR link : https://github.com/PearlThoughtsInternship/The-Config-Crew/pull/10
+

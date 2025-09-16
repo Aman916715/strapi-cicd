@@ -30,7 +30,7 @@ Containerization strapi application on Docker locally
 1. Ensure *Docker Desktop* is running.  
 2. Build a Docker image from this project directory.  
 3. Start a container using the built image.  
-4. Open a browser and navigate to *http://localhost:1337/admin* to access the admin panel.
+4. Open a browser and navigate to *http://localhost:1337/admin* to access the adm*panel.
 
-PR link : https://github.com/PearlThoughtsInternship/The-Config-Crew/pull/10
+PR link : *https://github.com/PearlThoughtsInternship/The-Config-Crew/pull/10*
 

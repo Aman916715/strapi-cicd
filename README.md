@@ -34,7 +34,6 @@ Containerization strapi application on Docker locally
 
 PR link : *https://github.com/PearlThoughtsInternship/The-Config-Crew/pull/10*
 
-<<<<<<< HEAD
 **Task 3**    setup postgreSQl container and strapi container and setup Nginx container as reverse proxy.
 ## ⚙️ Setup Instructions
 

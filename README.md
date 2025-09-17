@@ -51,3 +51,5 @@ http://localhost/admin
 
 PR link : https://github.com/PearlThoughtsInternship/The-Config-Crew/pull/10
 
+loom video link: https://www.loom.com/share/b849bb07208745c5b6abf875d8181651
+

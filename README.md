@@ -50,5 +50,5 @@ docker compose up -d --build
 ### 4 To access Strapi
 http://localhost/admin
 
-update README to trigger pr
+PR link : https://github.com/PearlThoughtsInternship/The-Config-Crew/pull/10
 

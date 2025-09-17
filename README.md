@@ -34,3 +34,20 @@ Containerization strapi application on Docker locally
 
 PR link : *https://github.com/PearlThoughtsInternship/The-Config-Crew/pull/10*
 
+**Task 3**
+## ⚙️ Setup Instructions
+
+### 1️ Clone the repository
+git clone https://github.com/PearlThoughtsInternship/The-Config-Crew.git
+
+### 2 Switch to branch 
+git checkout Aman
+
+### 3 To start the application
+docker compose up -d --build
+
+### 4 To access Strapi
+http://localhost/admin
+
+
+

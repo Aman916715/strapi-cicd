@@ -50,8 +50,5 @@ docker compose up -d --build
 ### 4 To access Strapi
 http://localhost/admin
 
-
-=======
-<!-- Update to trigger PR -->
->>>>>>> 28b337725a (update README to trigger PR)
+update README to trigger pr
 

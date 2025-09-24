@@ -1,0 +1,16 @@
+# Terraform secrets and state
+terraform.tfvars
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# environment files and local config
+.env
+.DS_Store
+node_modules/
+
+# editor / IDE
+.vscode/
+.idea/
+*.swp

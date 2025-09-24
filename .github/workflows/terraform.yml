@@ -29,6 +29,12 @@ jobs:
         run: |
           CI_RUN_ID=${{ github.event.workflow_run.id }}
           IMAGE_URI=$(gh run view $CI_RUN_ID --json jobs -q '.jobs[] | select(.name=="build").outputs.IMAGE_URI')
+
+          if [ -z "$IMAGE_URI" ]; then
+            echo "ERROR: IMAGE_URI is empty! Check CI workflow outputs."
+            exit 1
+          fi
+    
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
           echo "Using IMAGE_URI=$IMAGE_URI"
           

@@ -22,15 +22,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
 
-      - name: Download Image Info Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: image-info
-          path: .
-
-      - name: Read IMAGE_URI
+      - name: Set IMAGE_URI from CI workflow output
         run: |
-          IMAGE_URI=$(cat image-info.txt)
+          IMAGE_URI=${{ github.event.workflow_run.outputs.IMAGE_URI }}
+          if [ -z "$IMAGE_URI" ]; then
+            echo "ERROR: IMAGE_URI is empty! Check CI workflow outputs."
+            exit 1
+          fi
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
           echo "Using IMAGE_URI=$IMAGE_URI"
 

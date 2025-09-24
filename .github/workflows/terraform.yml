@@ -1,0 +1,51 @@
+name: CD - Deploy with Terraform
+
+on:
+  workflow_dispatch:   # Manual trigger
+  workflow_run:
+    workflows: ["CI - Build and Push Docker Image"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Download Image Info
+        uses: actions/download-artifact@v3
+        with:
+          name: image-info
+
+      - name: Set IMAGE_URI
+        run: |
+          source image-info
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+          echo "Using $IMAGE_URI"
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.7.5   # or your version
+
+      - name: Terraform Init
+        run: terraform -chdir=strapi-terraform init
+
+      - name: Terraform Plan
+        run: terraform -chdir=strapi-terraform plan \
+           -var="image_uri=145065858967.dkr.ecr.ap-south-1.amazonaws.com/strapi-aman"
+           -var="image_tag=${{ env.IMAGE_TAG }}"
+
+      - name: Terraform Apply
+        run: terraform -chdir=strapi-terraform apply -auto-approve \
+           -var="image_uri=145065858967.dkr.ecr.ap-south-1.amazonaws.com/strapi-aman"
+           -var="image_tag=${{ env.IMAGE_TAG }}"

@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+       IMAGE_URI: ${{ steps.set-image.outputs.IMAGE_URI }}
 
     steps:
       - name: Checkout code
@@ -26,11 +28,18 @@ jobs:
 
       - name: Build, Tag, and Push Docker Image
         run: |
+          IMAGE_TAG=${{ github.sha }}
+          ECR_REPO=145065858967.dkr.ecr.ap-south-1.amazonaws.com/strapi-aman
+          IMAGE_URI=$ECR_REPO:$IMAGE_TAG
+          docker build -t $IMAGE_URI .
+          docker push $IMAGE_URI
+          echo "Pushed $IMAGE_URI"
+
+      - name: Set IMAGE_URI output
+        id: set-image
+        run: |
           IMAGE_URI=145065858967.dkr.ecr.ap-south-1.amazonaws.com/strapi-aman:${{ github.sha }}
           echo "IMAGE_URI=$IMAGE_URI"
-          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
-
-    outputs:
-         IMAGE_URI: ${{ steps.build.outputs.IMAGE_URI }}
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
         
         

@@ -24,6 +24,8 @@ jobs:
 
 
       - name: Set IMAGE_URI from CI output
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           CI_RUN_ID=${{ github.event.workflow_run.id }}
           IMAGE_URI=$(gh run view $CI_RUN_ID --job build --json outputs -q '.outputs.IMAGE_URI')

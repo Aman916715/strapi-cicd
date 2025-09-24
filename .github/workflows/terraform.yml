@@ -29,9 +29,11 @@ jobs:
 
       - name: Set IMAGE_URI
         run: |
-          source image-info
+          CI_RUN_ID=${{ github.event.workflow_run.id }}
+          IMAGE_URI=$(gh run view $CI_RUN_ID --job build --json outputs -q '.outputs.IMAGE_URI')
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
-          echo "Using $IMAGE_URI"
+          echo "Using IMAGE_URI=$IMAGE_URI"
+          
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:

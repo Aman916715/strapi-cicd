@@ -23,7 +23,7 @@ jobs:
           aws-region: ap-south-1
 
       - name: Download Image Info
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: image-info
 

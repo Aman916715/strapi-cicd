@@ -24,7 +24,7 @@ jobs:
 
       - name: Set IMAGE_URI from CI workflow output
         run: |
-          IMAGE_URI=${{ github.event.workflow_run.outputs.IMAGE_URI }}
+          IMAGE_URI="${{ github.event.workflow_run.jobs.build.outputs.IMAGE_URI }}"
           if [ -z "$IMAGE_URI" ]; then
             echo "ERROR: IMAGE_URI is empty! Check CI workflow outputs."
             exit 1
@@ -38,8 +38,7 @@ jobs:
           terraform_version: 1.7.5
 
       - name: Terraform Init
-        run: |
-          terraform -chdir=strapi-terraform init
+        run: terraform -chdir=strapi-terraform init
 
       - name: Terraform Plan
         run: |

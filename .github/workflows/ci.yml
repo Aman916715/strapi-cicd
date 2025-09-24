@@ -33,8 +33,12 @@ jobs:
 
           echo "IMAGE_URI=$ECR_REPO:$IMAGE_TAG" >> $GITHUB_ENV
           echo "Pushed $ECR_REPO:$IMAGE_TAG"
-      - name: Save Image Tag for CD
-        uses: actions/upload-artifact@v4
-        with:
-          name: image-info
-          path: image-info.txt
+          
+      - name: Set IMAGE_URI output
+        id : set-image
+        run: |
+          IMAGE_URI=145065858967.dkr.ecr.ap-south-1.amazonaws.com/strapi-aman:${{ github.sha }}
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
+        
+        

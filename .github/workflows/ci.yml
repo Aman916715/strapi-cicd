@@ -26,19 +26,11 @@ jobs:
 
       - name: Build, Tag, and Push Docker Image
         run: |
-          IMAGE_TAG=${{ github.sha }}
-          ECR_REPO=145065858967.dkr.ecr.ap-south-1.amazonaws.com/strapi-aman
-          docker build -t $ECR_REPO:$IMAGE_TAG .
-          docker push $ECR_REPO:$IMAGE_TAG
-          IMAGE_URI=$ECR_REPO:$IMAGE_TAG
+          IMAGE_URI=145065858967.dkr.ecr.ap-south-1.amazonaws.com/strapi-aman:${{ github.sha }}
           echo "IMAGE_URI=$IMAGE_URI"
-          # Save to file for artifact
-          echo $IMAGE_URI > image-info.txt
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
 
-      - name: Upload Image Info Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: image-info
-          path: image-info.txt
+    outputs:
+         IMAGE_URI: ${{ steps.build.outputs.IMAGE_URI }}
         
         

@@ -49,11 +49,11 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform -chdir=strapi-terraform plan \
-             -var="image_uri=${IMAGE_URI}" \
+             -var="image_uri=${IMAGE_URI%:*}" \
              -var="image_tag=${IMAGE_URI##*:}"
 
       - name: Terraform Apply
         run: |
           terraform -chdir=strapi-terraform apply -auto-approve \
-             -var="image_uri=${IMAGE_URI}" \
+             -var="image_uri=${IMAGE_URI%:*}" \
              -var="image_tag=${IMAGE_URI##*:}"

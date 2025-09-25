@@ -81,7 +81,7 @@ resource "aws_instance" "strapi" {
   })
 
   tags = {
-    Name = "StrapiServer"
+    Name = "StrapiServer-Aman"
   }
 }
 
